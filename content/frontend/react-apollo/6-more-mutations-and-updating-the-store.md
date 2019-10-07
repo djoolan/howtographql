@@ -284,10 +284,9 @@ Open `LinkList.js` and add the following method inside the scope of the `LinkLis
 ```js(path=".../hackernews-react-apollo/src/components/LinkList.js")
 _updateCacheAfterVote = (store, createVote, linkId) => {
   const data = store.readQuery({ query: FEED_QUERY })
-
-  const votedLink = data.feed.links.find(link => link.id === linkId)
-  votedLink.votes = createVote.link.votes
-
+  
+  data.feed.links.find(link => link.id === linkId).votes.push(createVote)
+  
   store.writeQuery({ query: FEED_QUERY, data })
 }
 ```
